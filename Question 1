@@ -1,0 +1,25 @@
+1.Blocking and Non-Blocking Code in Node.js
+Node.js is naturally non-blocking because it uses an event-driven, asynchronous model.
+However, blocking code can still be written, for example, by using synchronous functions.
+Blocking Code Example in Node.js (Synchronous)
+const fs = require('fs');
+console.log('Task 1 starting...');
+const data = fs.readFileSync('file.txt', 'utf8');
+console.log(data);
+console.log('Task 1 finished.');
+console.log('Task 2 starting...');
+for (let i = 0; i < 1e9; i++) {}
+console.log('Task 2 finished.');
+
+
+Non-Blocking Code Example in Node.js (Asynchronous)
+const fs = require('fs');
+console.log('Task 1 starting...');
+fs.readFile('file.txt', 'utf8', (err, data) => {
+ if (err) throw err;
+ console.log(data);
+ console.log('Task 1 finished.');
+});
+console.log('Task 2 starting...');
+for (let i = 0; i < 1e9; i++) {}
+console.log('Task 2 finished.');
